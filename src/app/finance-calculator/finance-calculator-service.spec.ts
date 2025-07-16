@@ -99,25 +99,21 @@ describe('FinanceCalculatorService', () => {
       });
     });
 
-    it('should calculate correctly with zero deposit', (done) => {
+    it('should throw an error if deposit is zero or negative', (done) => {
       const term = 36;
       const deposit = 0;
-      service
-        .generateFinanceQuote(mockVehicle, term, deposit)
-        .subscribe((quote) => {
-          expect(quote.totalDeposit).toBe(0);
-          expect(quote.totalAmountOfCredit).toBe(mockVehicle.price);
-
-          const monthlyInterestRate = FINANCE_MONTHLY_INTEREST_RATE;
-          const totalAmountOfCredit = mockVehicle.price;
-          const expectedMonthlyPayment =
-            (totalAmountOfCredit * monthlyInterestRate) /
-            (1 - Math.pow(1 + monthlyInterestRate, -term));
-          expect(quote.monthlyPayment).toBe(
-            parseFloat(expectedMonthlyPayment.toFixed(2))
+      service.generateFinanceQuote(mockVehicle, term, deposit).subscribe({
+        error: (error) => {
+          expect(error.message).toBe('Deposit invalid');
+          done();
+        },
+        next: () => {
+          fail(
+            'Expected an error for zero deposit, but the quote was generated successfully.'
           );
           done();
-        });
+        },
+      });
     });
   });
 });

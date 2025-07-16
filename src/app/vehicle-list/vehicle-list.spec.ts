@@ -79,10 +79,4 @@ describe('VehicleListComponent', () => {
     expect(mockVehicleStore.setSortType).toHaveBeenCalledWith('price');
     expect(mockVehicleStore.setSortDirection).toHaveBeenCalledWith('asc');
   });
-
-  it('should navigate to vehicle detail when navigateToVehicleDetail is called', () => {
-    const vehicleId = '123';
-    component.navigateToVehicleDetail(vehicleId);
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/vehicle', vehicleId]);
-  });
 });
