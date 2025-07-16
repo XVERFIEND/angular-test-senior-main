@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <button (click)="goBack()" class="back-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Back to Vehicles
+      </button>
+      <h1 class="main-title">Vehicle Details</h1>
+      <div class="spacer"></div>
+    </div>
+
+    @if (vehicleDataAttemptedLoad()) { @if (vehicle(); as vehicleData) {
+    <div class="vehicle-info-card">
+      <h2 class="vehicle-title">
+        {{ vehicleData.make }} {{ vehicleData.model }}
+      </h2>
+      <p class="vehicle-price">
+        On the Road Price:
+        <span class="amount">£{{ vehicleData.price | number : "1.2-2" }}</span>
+      </p>
+
+      <div class="input-grid">
+        <div class="input-group">
+          <label for="term">Loan Term (months):</label>
+          <input
+            id="term"
+            type="number"
+            min="12"
+            max="120"
+            [ngModel]="term()"
+            (ngModelChange)="term.set($event)"
+            class="input-field"
+            placeholder="e.g., 60"
+          />
+        </div>
+        <div class="input-group">
+          <label for="deposit">Deposit (£):</label>
+          <input
+            id="deposit"
+            type="number"
+            min="0"
+            [max]="vehicleData.price - 1"
+            [ngModel]="deposit()"
+            (ngModelChange)="deposit.set($event)"
+            class="input-field"
+            placeholder="e.g., 2500"
+          />
+        </div>
+      </div>
+    </div>
+
+    @if (financeQuote(); as quote) { @if (quoteError()) {
+    <div class="error-message">
+      <strong>Calculation Error!</strong>
+      <span> {{ quoteError() }}</span>
+    </div>
+    } @else {
+    <div class="finance-quote-card">
+      <h3 class="quote-title">Your Finance Quote</h3>
+      <ul class="quote-list">
+        <li>
+          <span>On the Road Price:</span>
+          <span>£{{ quote.onTheRoadPrice | number : "1.2-2" }}</span>
+        </li>
+        <li>
+          <span>Total Deposit:</span>
+          <span>£{{ quote.totalDeposit | number : "1.2-2" }}</span>
+        </li>
+        <li>
+          <span>Total Amount of Credit:</span>
+          <span>£{{ quote.totalAmountOfCredit | number : "1.2-2" }}</span>
+        </li>
+        <li>
+          <span>Number of Monthly Payments:</span>
+          <span>{{ quote.numberOfMonthlyPayments }}</span>
+        </li>
+        <li class="monthly-payment-item">
+          <span class="label">Monthly Payment:</span>
+          <span class="amount"
+            >£{{ quote.monthlyPayment | number : "1.2-2" }}</span
+          >
+        </li>
+      </ul>
+    </div>
+    } } @else {
+    <div class="loading-message">
+      <p>Calculating finance quote...</p>
+    </div>
+    } } @else if (vehicleNotFound()) {
+    <div class="not-found-container">
+      <h2>404 Vehicle Not Found :(</h2>
+      <p>
+        Sorry, it looks like this vehicle has gone missing!
+      </p>
+    </div>
+    } } @else {
+    <div class="loading-vehicle-message">
+      <p>Loading vehicle data...</p>
+    </div>
+    }
+  </div>
+</div>
