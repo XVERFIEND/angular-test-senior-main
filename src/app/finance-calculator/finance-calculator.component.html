@@ -1,0 +1,70 @@
+<div class="finance-calculator-container">
+  @if (vehicle) {
+  <div class="input-grid">
+    <div class="input-group">
+      <label for="term">Loan Term (months):</label>
+      <input
+        id="term"
+        type="number"
+        min="12"
+        max="120"
+        [ngModel]="term()"
+        (ngModelChange)="term.set($event)"
+        class="input-field"
+        placeholder="e.g., 60"
+      />
+    </div>
+    <div class="input-group">
+      <label for="deposit">Deposit (£):</label>
+      <input
+        id="deposit"
+        type="number"
+        min="0"
+        [max]="vehicle.price - 1"
+        [ngModel]="deposit()"
+        (ngModelChange)="deposit.set($event)"
+        class="input-field"
+        placeholder="e.g., 2500"
+      />
+    </div>
+  </div>
+
+  @if (financeQuote(); as quote) { @if (quoteError()) {
+  <div class="error-message">
+    <strong>Calculation Error!</strong>
+    <span> {{ quoteError() }}</span>
+  </div>
+  } @else {
+  <div class="finance-quote-card">
+    <h3 class="quote-title">Your Finance Quote</h3>
+    <ul class="quote-list">
+      <li>
+        <span>On the Road Price:</span>
+        <span>£{{ quote.onTheRoadPrice | number : "1.2-2" }}</span>
+      </li>
+      <li>
+        <span>Total Deposit:</span>
+        <span>£{{ quote.totalDeposit | number : "1.2-2" }}</span>
+      </li>
+      <li>
+        <span>Total Amount of Credit:</span>
+        <span>£{{ quote.totalAmountOfCredit | number : "1.2-2" }}</span>
+      </li>
+      <li>
+        <span>Number of Monthly Payments:</span>
+        <span>{{ quote.numberOfMonthlyPayments }}</span>
+      </li>
+      <li class="monthly-payment-item">
+        <span class="label">Monthly Payment:</span>
+        <span class="amount"
+          >£{{ quote.monthlyPayment | number : "1.2-2" }}</span
+        >
+      </li>
+    </ul>
+  </div>
+  } } @else {
+  <div class="loading-message">
+    <p>Calculating finance quote...</p>
+  </div>
+  } }
+</div>

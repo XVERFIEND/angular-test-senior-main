@@ -1,43 +1,45 @@
 <div class="list-container">
   <div class="list-card">
-    <h1 class="main-title">Available Vehicles</h1>
-
     <div class="controls">
-      <input type="text" [formControl]="searchControl" placeholder="Search by make or model" class="input-field" />
+      <input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Search vehicles..."
+        class="input-field"
+      />
 
       <select [formControl]="sortTypeControl" class="select-field">
         @for (option of vehicleSortOptions; track option.sortType) {
-          <option [value]="option.sortType">{{ option.label }}</option>
+        <option [value]="option.sortType">Sort by: {{ option.label }}</option>
         }
       </select>
 
       <select [formControl]="sortDirectionControl" class="select-field">
         @for (option of directionSortOptions; track option.sortType) {
-          <option [value]="option.sortType">{{ option.label }}</option>
+        <option [value]="option.sortType">Direction: {{ option.label }}</option>
         }
       </select>
     </div>
 
-    @if (vehicleStore.loading()) {
-      <div class="message">
-        <p>Loading vehicles...</p>
-      </div>
-    } @else if (vehicleStore.error()) {
-      <div class="error-message">
-        <p>Error: {{ vehicleStore.error() }}</p>
-      </div>
-    } @else {
-      <ul class="vehicle-list">
-        @for (vehicle of vehicleStore.filteredAndSortedVehicles(); track vehicle.id) {
-          <li (click)="navigateToVehicleDetail(vehicle.id)" class="vehicle-list-item">
-            <strong>{{ vehicle.make }} {{ vehicle.model }}</strong> ({{ vehicle.year }}) - <span class="price">£{{ vehicle.price | number:'1.2-2' }}</span>
-          </li>
-        } @empty {
-          <li class="message">No vehicles found matching your criteria.</li>
-        }
-      </ul>
-
-      <p class="count-message">Displaying {{ vehicleStore.filteredAndSortedVehicles().length }} of {{ vehicleStore.totalVehicles() }} vehicles.</p>
-    }
+    @if (loading()) {
+    <div class="message loading-spinner">Loading vehicles...</div>
+    } @if (error(); as errorValue) {
+    <div class="error-message">Error: {{ errorValue }}</div>
+    } @if (vehicles(); as vehiclesList) {
+    <div class="vehicle-list">
+      @for (vehicle of vehiclesList; track vehicle.id) {
+      <app-vehicle-list-item
+        [vehicle]="vehicle"
+        (selected)="onVehicleSelected(vehicle.id)"
+      ></app-vehicle-list-item>
+      } @empty { @if (!loading() && !error()) {
+      <div class="message no-vehicles-found">No vehicles found.</div>
+      } }
+    </div>
+    @if (vehiclesList.length > 0) {
+    <div class="count-message">{{ vehiclesList.length }} vehicles found</div>
+    } } @else { @if (!loading() && !error()) {
+    <div class="message no-vehicles-found">No vehicles found.</div>
+    } }
   </div>
 </div>

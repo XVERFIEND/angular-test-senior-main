@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <button (click)="goBack()" class="back-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Back to Vehicles
+      </button>
+      <h1 class="main-title">Vehicle Details</h1>
+      <div class="spacer"></div>
+    </div>
+
+    @if (vehicleDataAttemptedLoad()) {
+      @if (vehicle(); as vehicleData) {
+        <div class="vehicle-info-card">
+          <h2 class="vehicle-title">
+            {{ vehicleData.make }} {{ vehicleData.model }}
+          </h2>
+          <p class="vehicle-price">
+            On the Road Price:
+            <span class="amount">£{{ vehicleData.price | number : "1.2-2" }}</span>
+          </p>
+        </div>
+
+        <app-finance-calculator
+          [vehicle]="vehicleData"
+        ></app-finance-calculator>
+
+      } @else if (vehicleNotFound()) {
+        <div class="not-found-container">
+          <h2>404 Vehicle Not Found :(</h2>
+          <p>Sorry, it looks like this vehicle has gone missing!</p>
+        </div>
+      }
+    } @else {
+      <div class="loading-vehicle-message">
+        <p>Loading vehicle data...</p>
+      </div>
+    }
+  </div>
+</div>

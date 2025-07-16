@@ -1,11 +1,17 @@
-import { signalStore, withState, withComputed, withMethods, withHooks } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withComputed,
+  withMethods,
+  withHooks,
+} from '@ngrx/signals';
 import { computed, inject } from '@angular/core';
 import { patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap, catchError, of } from 'rxjs';
 import { Vehicle } from './vehicle.model';
-import { VehicleSortService } from '../vehicle-list/vehicle-sort/vehicle-sort.service';
 import { VehicleDataService } from './vehicle-data.service';
+import { VehicleSortService } from '../vehicle-sort/vehicle-sort.service';
 
 interface VehicleState {
   vehicles: Vehicle[];
@@ -36,7 +42,7 @@ export const VehicleStore = signalStore(
       if (!selectedId) {
         return undefined;
       }
-      return store.vehicles().find(v => v.id === selectedId);
+      return store.vehicles().find((v) => v.id === selectedId);
     }),
     totalVehicles: computed(() => store.vehicles().length),
     filteredAndSortedVehicles: computed(() => {
@@ -89,7 +95,7 @@ export const VehicleStore = signalStore(
     },
     setSortDirection(sortDirection: 'asc' | 'desc') {
       patchState(store, { sortDirection });
-    }
+    },
   })),
   withHooks(({ loadVehicles }) => ({
     onInit() {

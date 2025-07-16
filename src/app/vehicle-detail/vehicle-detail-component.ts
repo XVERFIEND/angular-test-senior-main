@@ -1,25 +1,22 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap, catchError, startWith, filter } from 'rxjs/operators';
-import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { VehicleStore } from '../vehicle/vehicle.store';
-import { FormsModule } from '@angular/forms';
-import { combineLatest, of } from 'rxjs';
-import { FinanceCalculatorService } from '../finance-calculator/finance-calculator-service';
-import { Vehicle } from '../vehicle/vehicle.model';
+import { FinanceCalculatorComponent } from '../finance-calculator/finance-calculator.component';
 
 @Component({
   selector: 'app-vehicle-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FinanceCalculatorComponent],
   templateUrl: './vehicle-detail-component.html',
   styleUrl: './vehicle-detail-component.scss',
 })
 export class VehicleDetailComponent {
   private route = inject(ActivatedRoute);
   readonly vehicleStore = inject(VehicleStore);
-  private financeCalculatorService = inject(FinanceCalculatorService);
+  private router = inject(Router);
 
   vehicleId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id'))),
@@ -39,43 +36,7 @@ export class VehicleDetailComponent {
   vehicleDataAttemptedLoad = signal(false);
   vehicleNotFound = signal(false);
 
-  term = signal(60);
-  deposit = signal(0);
-
-  quoteError = signal<string | null>(null);
-
-  private financeInputs$ = combineLatest([
-    toObservable(this.vehicle),
-    toObservable(this.term),
-    toObservable(this.deposit),
-  ]).pipe(
-    filter(([vehicle]) => !!vehicle),
-    map(([vehicle, term, deposit]) => ({
-      vehicle: vehicle as Vehicle,
-      term,
-      deposit,
-    }))
-  );
-
-  financeQuote = toSignal(
-    this.financeInputs$.pipe(
-      switchMap(({ vehicle, term, deposit }) => {
-        this.quoteError.set(null);
-        return this.financeCalculatorService
-          .generateFinanceQuote(vehicle, term, deposit)
-          .pipe(
-            catchError((err) => {
-              this.quoteError.set(err.message);
-              return of(null);
-            })
-          );
-      }),
-      startWith(null)
-    ),
-    { initialValue: null }
-  );
-
-  constructor(private router: Router) {
+  constructor() {
     effect(
       () => {
         if (
@@ -114,16 +75,6 @@ export class VehicleDetailComponent {
         this.vehicleStore.selectVehicle(currentRouteId);
       }
     });
-
-    effect(
-      () => {
-        const currentVehicle = this.vehicle();
-        if (currentVehicle && currentVehicle.price && this.deposit() === 0) {
-          this.deposit.set(parseFloat((currentVehicle.price * 0.1).toFixed(2)));
-        }
-      },
-      { allowSignalWrites: true }
-    );
   }
 
   goBack(): void {
