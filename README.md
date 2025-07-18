@@ -2,6 +2,20 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
 
+## Toms notes
+
+I made the vehicle service (vehicle.service.ts) as requested, but felt that a store would be more suitable for this kind of application. And it would be an excuse to show my skills. So additionally I created the vehicle store (vehicle.store.ts) using signalStore to handle data accross the application.
+
+Given more time I would have liked to have added the following:
+- More unit testing. I added a couple in there but a full suite of unit tests would obviously be required given the time.
+- Specialised components. Reusable button, input etc. Rather than repeating the styling throughout the app. It would keep the design consistant and made future additions faster/easier.
+- Themes. A dark mode would have been a nice addition. I already added in variables for the colours and I was planning on doing something using the new CSS conditional statements, but wanted to focus on the actual test itself before I got too fancy with it :)
+- Linting. I was experiencing a weird conflict with the version of NgRx that I had to use and ESlint. I was forced to use NgRx 19 (I believe a version for Angular 20 is yet to be released) and ESLint did not like it at all.
+
+Additional to this, you may need to run `npm install` with `--legacy-peer-deps` to install NgRx.
+
+`VehicleDataService` has been given a 1500ms delay to simulate loading and allow the state to be shown.
+
 ## Test instructions
 Please refer to the [test instructions readme file](https://github.com/cox-auto-inc-codeweavers/angular-test-senior/blob/main/Tech-Test-Senior-Frontend.md).
 
