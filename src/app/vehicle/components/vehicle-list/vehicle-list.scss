@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours";
 
 .list-container {
   min-height: 100vh;
@@ -14,9 +14,9 @@
     margin-left: auto;
     margin-right: auto;
     padding: 2rem;
-    background-color: $white;
+    background-color: colours.$white;
     border-radius: 0.75rem;
-    box-shadow: 0 20px 25px -5px $shadow-medium, 0 10px 10px -5px $shadow-dark;
+    box-shadow: 0 20px 25px -5px colours.$shadow-medium, 0 10px 10px -5px colours.$shadow-dark;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -29,7 +29,7 @@
     .main-title {
       font-size: 2rem;
       font-weight: 800;
-      color: $text-dark;
+      color: colours.$text-dark;
       text-align: center;
       margin-bottom: 1.5rem;
 
@@ -51,19 +51,19 @@
 
       .input-field,
       .select-field {
-        box-shadow: 0 1px 2px 0 $shadow-light;
+        box-shadow: 0 1px 2px 0 colours.$shadow-light;
         appearance: none;
-        border: 1px solid $light-border-gray;
+        border: 1px solid colours.$light-border-gray;
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
-        color: $dark-gray;
+        color: colours.$dark-gray;
         line-height: 1.5;
         transition: all 0.2s ease;
-        background-color: $white;
+        background-color: colours.$white;
 
         &:focus {
           outline: none;
-          box-shadow: 0 0 0 3px $button-focus;
+          box-shadow: 0 0 0 3px colours.$button-focus;
           border-color: transparent;
         }
       }
@@ -89,27 +89,27 @@
     .message {
       text-align: center;
       padding: 1.5rem 0;
-      background-color: $light-gray;
+      background-color: colours.$light-gray;
       border-radius: 0.5rem;
-      box-shadow: 0 1px 2px 0 $shadow-light;
-      color: $medium-gray;
+      box-shadow: 0 1px 2px 0 colours.$shadow-light;
+      color: colours.$medium-gray;
       font-size: 1.125rem;
     }
 
     .error-message {
-      background-color: $error-background;
-      border: 1px solid $error-border;
-      color: $error-text;
+      background-color: colours.$error-background;
+      border: 1px solid colours.$error-border;
+      color: colours.$error-text;
       padding: 1.5rem;
       border-radius: 0.5rem;
-      box-shadow: 0 4px 6px -1px $shadow-medium, 0 2px 4px -1px $shadow-lg-light;
+      box-shadow: 0 4px 6px -1px colours.$shadow-medium, 0 2px 4px -1px colours.$shadow-lg-light;
       font-weight: 600;
     }
 
     .count-message {
       text-align: right;
       margin-top: 1.5rem;
-      color: $medium-gray;
+      color: colours.$medium-gray;
       font-size: 0.875rem;
     }
   }

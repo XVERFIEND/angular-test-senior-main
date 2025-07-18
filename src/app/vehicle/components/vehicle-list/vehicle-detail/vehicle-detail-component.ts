@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { FinanceCalculatorComponent } from '../../../../finance-calculator/finance-calculator.component';
+import { FinanceCalculatorComponent } from '../../../../finance-calculator/components/finance-calculator.component';
 import { VehicleStore } from '../../../store/vehicle.store';
 
 @Component({

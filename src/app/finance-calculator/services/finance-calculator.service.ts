@@ -1,8 +1,8 @@
 import { Observable, of, throwError } from 'rxjs';
-import { FinanceQuote } from './interfaces/finance-quote.interface';
+import { FinanceQuote } from '.././interfaces/finance-quote.interface';
 import { Injectable } from '@angular/core';
-import { Vehicle } from '../vehicle/models/vehicle.model';
-import { FINANCE_MONTHLY_INTEREST_RATE } from '../shared/constants/finance.constants';
+import { Vehicle } from '../../vehicle/models/vehicle.model';
+import { FINANCE_MONTHLY_INTEREST_RATE } from '../../shared/constants/finance.constants';
 
 @Injectable({
   providedIn: 'root',

@@ -4,8 +4,8 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { combineLatest, map, switchMap, catchError, of, startWith } from 'rxjs';
 
-import { Vehicle } from '../vehicle/models/vehicle.model';
-import { FinanceCalculatorService } from './finance-calculator.service';
+import { Vehicle } from '../../vehicle/models/vehicle.model';
+import { FinanceCalculatorService } from '../services/finance-calculator.service';
 
 @Component({
   selector: 'app-finance-calculator',

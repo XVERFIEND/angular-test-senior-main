@@ -1,11 +1,11 @@
-@import "colours";
+@use "colours";
 
 .finance-calculator-container {
-  background-color: $card-bg;
+  background-color: colours.$card-bg;
   padding: 2rem;
   border-radius: 0.5rem;
-  box-shadow: inset 0 2px 4px 0 $shadow-lg-light;
-  border: 1px solid $light-blue;
+  box-shadow: inset 0 2px 4px 0 colours.$shadow-lg-light;
+  border: 1px solid colours.$light-blue;
   margin-bottom: 2rem;
 
   .input-grid {
@@ -22,7 +22,7 @@
   .input-group {
     label {
       display: block;
-      color: $medium-gray;
+      color: colours.$medium-gray;
       font-size: 0.875rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
@@ -30,31 +30,31 @@
   }
 
   .input-field {
-    box-shadow: 0 1px 2px 0 $shadow-light;
+    box-shadow: 0 1px 2px 0 colours.$shadow-light;
     appearance: none;
-    border: 1px solid $light-border-gray;
+    border: 1px solid colours.$light-border-gray;
     border-radius: 0.5rem;
     width: calc(100% - 2rem);
     padding: 0.5rem 1rem;
-    color: $dark-gray;
+    color: colours.$dark-gray;
     line-height: 1.5;
     transition: all 0.2s ease;
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 3px $button-focus;
+      box-shadow: 0 0 0 3px colours.$button-focus;
       border-color: transparent;
     }
   }
 
   .error-message {
-    background-color: $error-background;
-    border: 1px solid $error-border;
-    color: $error-text;
+    background-color: colours.$error-background;
+    border: 1px solid colours.$error-border;
+    color: colours.$error-text;
     padding: 1.5rem;
     border-radius: 0.5rem;
     position: relative;
-    box-shadow: 0 4px 6px -1px $shadow-medium, 0 2px 4px -1px $shadow-lg-light;
+    box-shadow: 0 4px 6px -1px colours.$shadow-medium, 0 2px 4px -1px colours.$shadow-lg-light;
     margin-top: 1.5rem;
 
     strong {
@@ -66,17 +66,17 @@
 }
 
 .finance-quote-card {
-  background-color: $green-bg;
+  background-color: colours.$green-bg;
   padding: 2rem;
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px $shadow-medium, 0 4px 6px -2px $shadow-light;
-  border: 1px solid $light-green;
+  box-shadow: 0 10px 15px -3px colours.$shadow-medium, 0 4px 6px -2px colours.$shadow-light;
+  border: 1px solid colours.$light-green;
   margin-top: 1.5rem;
 
   .quote-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: $dark-green;
+    color: colours.$dark-green;
     margin-bottom: 1.25rem;
     text-align: center;
   }
@@ -88,7 +88,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    color: $dark-gray;
+    color: colours.$dark-gray;
     font-size: 1.125rem;
 
     li {
@@ -98,30 +98,30 @@
 
       span:first-child {
         font-weight: 500;
-        color: $medium-gray;
+        color: colours.$medium-gray;
       }
 
       span:last-child {
         font-weight: 600;
-        color: $text-dark;
+        color: colours.$text-dark;
       }
     }
   }
 
   .monthly-payment-item {
     padding-top: 1rem;
-    border-top: 1px solid $light-border-gray;
+    border-top: 1px solid colours.$light-border-gray;
     margin-top: 1rem;
 
     .label {
       font-weight: 800;
-      color: $medium-blue;
+      color: colours.$medium-blue;
       font-size: 1.5rem;
     }
 
     .amount {
       font-weight: 800;
-      color: $medium-blue;
+      color: colours.$medium-blue;
       font-size: 1.875rem;
     }
   }
@@ -130,13 +130,13 @@
 .loading-message {
   text-align: center;
   padding: 1.5rem 0;
-  background-color: $light-gray;
+  background-color: colours.$light-gray;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 $shadow-light;
+  box-shadow: 0 1px 2px 0 colours.$shadow-light;
   margin-top: 1.5rem;
 
   p {
-    color: $medium-gray;
+    color: colours.$medium-gray;
     font-size: 1.125rem;
   }
 }

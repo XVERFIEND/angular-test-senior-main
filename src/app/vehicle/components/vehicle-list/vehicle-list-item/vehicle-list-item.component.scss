@@ -1,48 +1,48 @@
-@import "colours";
+@use "colours";
 
 .vehicle-card {
   display: flex;
   flex-direction: column;
-  background-color: $card-bg;
+  background-color: colours.$card-bg;
   align-items: flex-start;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px $shadow-medium, 0 2px 4px -1px $shadow-lg-light;
+  box-shadow: 0 4px 6px -1px colours.$shadow-medium, 0 2px 4px -1px colours.$shadow-lg-light;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
-  border: 1px solid $light-blue;
-  color: $dark-gray;
+  border: 1px solid colours.$light-blue;
+  color: colours.$dark-gray;
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: 1rem;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 15px -3px $shadow-medium, 0 4px 6px -2px $shadow-light;
+    box-shadow: 0 10px 15px -3px colours.$shadow-medium, 0 4px 6px -2px colours.$shadow-light;
   }
 
   h3 {
     margin-top: 0;
-    color: $dark-gray;
+    color: colours.$dark-gray;
   }
 
   p {
     margin: 5px 0;
-    color: $medium-gray;
+    color: colours.$medium-gray;
 
     strong {
       font-weight: 700;
-      color: $darker-blue;
+      color: colours.$darker-blue;
     }
 
     .price {
       font-weight: 600;
-      color: $medium-blue;
+      color: colours.$medium-blue;
     }
   }
 
   button {
-    background-color: $primary-blue;
+    background-color: colours.$primary-blue;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -53,7 +53,7 @@
     transition: background-color 0.2s ease-in-out;
 
     &:hover {
-      background-color: $darker-blue;
+      background-color: colours.$darker-blue;
     }
   }
 }

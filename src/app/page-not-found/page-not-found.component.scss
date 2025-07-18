@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours";
 
 .container {
   min-height: 100vh;
@@ -14,9 +14,9 @@
     margin-left: auto;
     margin-right: auto;
     padding: 2rem;
-    background-color: $white;
+    background-color: colours.$white;
     border-radius: 0.75rem;
-    box-shadow: 0 20px 25px -5px $shadow-medium, 0 10px 10px -5px $shadow-dark;
+    box-shadow: 0 20px 25px -5px colours.$shadow-medium, 0 10px 10px -5px colours.$shadow-dark;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -29,7 +29,7 @@
     .main-title {
       font-size: 2rem;
       font-weight: 800;
-      color: $text-dark;
+      color: colours.$text-dark;
       text-align: center;
       margin-bottom: 1.5rem;
     }
@@ -37,10 +37,10 @@
     .message {
       text-align: center;
       padding: 1.5rem 0;
-      background-color: $light-gray;
+      background-color: colours.$light-gray;
       border-radius: 0.5rem;
-      box-shadow: 0 1px 2px 0 $shadow-light;
-      color: $medium-gray;
+      box-shadow: 0 1px 2px 0 colours.$shadow-light;
+      color: colours.$medium-gray;
       font-size: 1.125rem;
     }
 
@@ -57,24 +57,24 @@
         font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
-        color: $white;
-        background-color: $primary-blue;
+        color: colours.$white;
+        background-color: colours.$primary-blue;
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 4px 6px -1px $shadow-medium,
-          0 2px 4px -1px $shadow-lg-light;
+        box-shadow: 0 4px 6px -1px colours.$shadow-medium,
+          0 2px 4px -1px colours.$shadow-lg-light;
 
         &:hover {
-          background-color: $darker-blue;
-          box-shadow: 0 10px 15px -3px $shadow-medium,
-            0 4px 6px -2px $shadow-light;
+          background-color: colours.$darker-blue;
+          box-shadow: 0 10px 15px -3px colours.$shadow-medium,
+            0 4px 6px -2px colours.$shadow-light;
         }
 
         &:focus {
           outline: none;
-          box-shadow: 0 0 0 3px $button-focus;
+          box-shadow: 0 0 0 3px colours.$button-focus;
         }
       }
     }
