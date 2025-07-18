@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { VehicleStore } from '../vehicle/vehicle.store';
-import { FinanceCalculatorComponent } from '../finance-calculator/finance-calculator.component';
+
+import { FinanceCalculatorComponent } from '../../../../finance-calculator/finance-calculator.component';
+import { VehicleStore } from '../../../store/vehicle.store';
 
 @Component({
   selector: 'app-vehicle-detail',

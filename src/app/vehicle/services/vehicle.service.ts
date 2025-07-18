@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { catchError, delay, Observable, of, switchMap, throwError } from 'rxjs';
-import { Vehicle } from './vehicle.model';
 import { HttpClient } from '@angular/common/http';
+
+import { Vehicle } from '../models/vehicle.model';
 
 @Injectable({
   providedIn: 'root',

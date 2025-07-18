@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { VehicleListComponent } from './vehicle-list/vehicle-list';
-import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail-component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { VehicleDetailComponent } from './vehicle/components/vehicle-list/vehicle-detail/vehicle-detail-component';
+import { VehicleListComponent } from './vehicle/components/vehicle-list/vehicle-list';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },

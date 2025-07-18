@@ -7,12 +7,13 @@ import {
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { VehicleListItemComponent } from '../vehicle-list-item/vehicle-list-item.component';
+import { VehicleListItemComponent } from './vehicle-list-item/vehicle-list-item.component';
+
 import {
-  DIRECTION_SORT_OPTIONS,
   VEHICLE_SORT_OPTIONS,
-} from '../vehicle-sort/vehicle-sort-options.constants';
-import { Vehicle } from '../vehicle/vehicle.model';
+  DIRECTION_SORT_OPTIONS,
+} from '../../../shared/constants/vehicle-sort-options.constants';
+import { Vehicle } from '../../models/vehicle.model';
 import { VehicleListFacade } from './vehicle-list.facade';
 
 @Component({

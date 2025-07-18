@@ -9,9 +9,10 @@ import { computed, inject } from '@angular/core';
 import { patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap, catchError, of } from 'rxjs';
-import { Vehicle } from './vehicle.model';
-import { VehicleDataService } from './vehicle-data.service';
-import { VehicleSortService } from '../vehicle-sort/vehicle-sort.service';
+
+import { Vehicle } from '../models/vehicle.model';
+import { VehicleDataService } from '../services/vehicle-data.service';
+import { VehicleSortService } from '../services/vehicle-sort.service';
 
 // defines the interface for the state
 interface VehicleState {

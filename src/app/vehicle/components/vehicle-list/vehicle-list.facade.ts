@@ -2,8 +2,9 @@ import { Injectable, inject, Signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Vehicle } from '../vehicle/vehicle.model';
-import { VehicleStore } from '../vehicle/vehicle.store';
+
+import { Vehicle } from '../../models/vehicle.model';
+import { VehicleStore } from '../../store/vehicle.store';
 
 @Injectable({
   providedIn: 'root',

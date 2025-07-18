@@ -1,9 +1,9 @@
-import { SortOption } from './vehicle-sort-options.model';
+import { SortOption } from '../models/vehicle-sort-options.model';
 
 export const VEHICLE_SORT_OPTIONS: SortOption[] = [
   { sortType: 'price', label: 'Price' },
   { sortType: 'year', label: 'Year' },
-  { sortType: 'mileage', label: 'Mileage' }
+  { sortType: 'mileage', label: 'Mileage' },
 ];
 
 export const DIRECTION_SORT_OPTIONS: {

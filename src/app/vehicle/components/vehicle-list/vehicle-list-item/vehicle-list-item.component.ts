@@ -1,13 +1,12 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
+  input,
+  output,
 } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 
-import { Vehicle } from '../vehicle/vehicle.model';
+import { Vehicle } from '../../../models/vehicle.model';
 
 @Component({
   selector: 'app-vehicle-list-item',
@@ -19,13 +18,13 @@ import { Vehicle } from '../vehicle/vehicle.model';
 })
 export class VehicleListItemComponent {
   // input vehicle object
-  @Input({ required: true }) vehicle!: Vehicle;
+  vehicle = input.required<Vehicle>();
 
-  // ouput string event
-  @Output() selected = new EventEmitter<string>();
+  // ouput string
+  selected = output<string>();
 
   // called from template. on click, emit the vehicle id
   onViewDetails(): void {
-    this.selected.emit(this.vehicle.id);
+    this.selected.emit(this.vehicle().id);
   }
 }

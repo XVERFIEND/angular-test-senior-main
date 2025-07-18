@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { FinanceCalculatorService } from './finance-calculator-service';
-import { Vehicle } from '../vehicle/vehicle.model';
-import { FINANCE_MONTHLY_INTEREST_RATE } from '../shared/finance.constants';
+
+import { FINANCE_MONTHLY_INTEREST_RATE } from '../shared/constants/finance.constants';
+import { Vehicle } from '../vehicle/models/vehicle.model';
+import { FinanceCalculatorService } from './finance-calculator.service';
 
 describe('FinanceCalculatorService', () => {
   let service: FinanceCalculatorService;

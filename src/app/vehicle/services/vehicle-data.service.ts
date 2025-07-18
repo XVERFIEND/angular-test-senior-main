@@ -2,7 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, delay, catchError, throwError } from 'rxjs';
-import { Vehicle } from './vehicle.model';
+
+import { Vehicle } from '../models/vehicle.model';
 
 @Injectable({
   providedIn: 'root',

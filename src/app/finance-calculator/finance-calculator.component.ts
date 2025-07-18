@@ -1,11 +1,11 @@
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { Component, Input, signal, inject, effect } from '@angular/core';
+import { Component, Input, signal, inject, effect, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { combineLatest, map, switchMap, catchError, of, startWith } from 'rxjs';
 
-import { Vehicle } from '../vehicle/vehicle.model';
-import { FinanceCalculatorService } from './finance-calculator-service';
+import { Vehicle } from '../vehicle/models/vehicle.model';
+import { FinanceCalculatorService } from './finance-calculator.service';
 
 @Component({
   selector: 'app-finance-calculator',
@@ -15,8 +15,8 @@ import { FinanceCalculatorService } from './finance-calculator-service';
   styleUrl: './finance-calculator.component.scss',
 })
 export class FinanceCalculatorComponent {
-  // vehicle object propery is required and cannot be null
-  @Input({ required: true }) vehicle!: Vehicle;
+  // vehicle object input property
+  vehicle = input.required<Vehicle>();
 
   // default state
   term = signal(60);
@@ -36,8 +36,8 @@ export class FinanceCalculatorComponent {
     */
     effect(
       () => {
-        if (this.vehicle && this.vehicle.price && this.deposit() === 0) {
-          this.deposit.set(parseFloat((this.vehicle.price * 0.1).toFixed(2)));
+        if (this.vehicle && this.vehicle().price && this.deposit() === 0) {
+          this.deposit.set(parseFloat((this.vehicle().price * 0.1).toFixed(2)));
         }
       },
       { allowSignalWrites: true }
@@ -51,7 +51,7 @@ export class FinanceCalculatorComponent {
     toObservable(this.deposit),
   ]).pipe(
     map(([term, deposit]) => ({
-      vehicle: this.vehicle as Vehicle,
+      vehicle: this.vehicle() as Vehicle,
       term,
       deposit,
     }))

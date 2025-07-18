@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { VehicleStore } from '../vehicle/vehicle.store';
 import { signal } from '@angular/core';
+
 import { VehicleListComponent } from './vehicle-list';
+import { VehicleStore } from '../../store/vehicle.store';
 
 describe('VehicleListComponent', () => {
   let component: VehicleListComponent;

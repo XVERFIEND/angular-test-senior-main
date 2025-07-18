@@ -1,5 +1,5 @@
 <div class="finance-calculator-container">
-  @if (vehicle) {
+  @if (vehicle()) {
   <div class="input-grid">
     <div class="input-group">
       <label for="term">Loan Term (months):</label>
@@ -20,7 +20,7 @@
         id="deposit"
         type="number"
         min="0"
-        [max]="vehicle.price - 1"
+        [max]="vehicle().price - 1"
         [ngModel]="deposit()"
         (ngModelChange)="deposit.set($event)"
         class="input-field"
