@@ -1,59 +1,59 @@
-:host {
-  display: block;
-}
+@import "colours";
 
 .vehicle-card {
-  background-color: #eff6ff;
+  display: flex;
+  flex-direction: column;
+  background-color: $card-bg;
+  align-items: flex-start;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px $shadow-medium, 0 2px 4px -1px $shadow-lg-light;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
-  border: 1px solid #bfdbfe;
-  color: #2d3748;
+  border: 1px solid $light-blue;
+  color: $dark-gray;
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: 1rem;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 15px -3px $shadow-medium, 0 4px 6px -2px $shadow-light;
   }
 
   h3 {
     margin-top: 0;
-    color: #333;
+    color: $dark-gray;
   }
 
   p {
     margin: 5px 0;
-    color: #555;
-  }
+    color: $medium-gray;
 
-  p strong {
-    font-weight: 700;
-    color: #2c5282;
-  }
+    strong {
+      font-weight: 700;
+      color: $darker-blue;
+    }
 
-  p .price {
-    font-weight: 600;
-    color: #2b6cb0;
+    .price {
+      font-weight: 600;
+      color: $medium-blue;
+    }
   }
 
   button {
-    background-color: #007bff;
+    background-color: $primary-blue;
     color: white;
     border: none;
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    margin-left: auto;
     transition: background-color 0.2s ease-in-out;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: $darker-blue;
     }
   }
 }

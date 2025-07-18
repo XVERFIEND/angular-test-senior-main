@@ -1,3 +1,5 @@
+@import "colours";
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -13,265 +15,169 @@
   margin-left: auto;
   margin-right: auto;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 0.75rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px $shadow-medium, 0 10px 10px -5px $shadow-dark;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-}
 
-@media (max-width: 640px) {
-  .card {
+  @media (max-width: 640px) {
     padding: 1.5rem;
     max-width: 95%;
   }
-  .main-title {
-    font-size: 1.5rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background-color: $light-border-gray;
+      color: $medium-gray;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px $shadow-medium, 0 2px 4px -1px $shadow-lg-light;
+      transition: background-color 0.3s ease-in-out;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+
+      &:hover {
+        background-color: $light-blue;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px $button-focus;
+      }
+
+      svg {
+        height: 1.25rem;
+        width: 1.25rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .main-title {
+      font-size: 1.875rem;
+      font-weight: 800;
+      color: $text-dark;
+      text-align: center;
+      flex-grow: 1;
+
+      @media (max-width: 640px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .spacer {
+      width: 25%;
+    }
   }
-}
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
+  .vehicle-info-card {
+    background-color: $card-bg;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 2px 4px 0 $shadow-lg-light;
+    border: 1px solid $light-blue;
+    margin-bottom: 2rem;
 
-.back-button {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: #e2e8f0;
-  color: #4a5568;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: background-color 0.3s ease-in-out;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-}
+    .vehicle-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2c5282;
+      margin-bottom: 1rem;
+    }
 
-.back-button:hover {
-  background-color: #cbd5e0;
-}
+    .vehicle-price {
+      font-size: 1.25rem;
+      color: $dark-gray;
+      margin-bottom: 1.5rem;
 
-.back-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(160, 174, 192, 0.75);
-}
+      .amount {
+        font-weight: 600;
+        color: $medium-blue;
+      }
+    }
 
-.back-button svg {
-  height: 1.25rem;
-  width: 1.25rem;
-  margin-right: 0.5rem;
-}
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
 
-.main-title {
-  font-size: 1.875rem;
-  font-weight: 800;
-  color: #1a202c;
-  text-align: center;
-  flex-grow: 1;
-}
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-.spacer {
-  width: 25%;
-}
+    .input-group {
+      label {
+        display: block;
+        color: $medium-gray;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+    }
 
-.vehicle-info-card {
-  background-color: #eff6ff;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-  border: 1px solid #bfdbfe;
-  margin-bottom: 2rem;
-}
+    .input-field {
+      box-shadow: 0 1px 2px 0 $shadow-light;
+      appearance: none;
+      border: 1px solid $light-border-gray;
+      border-radius: 0.5rem;
+      width: calc(100% - 2rem);
+      padding: 0.5rem 1rem;
+      color: $dark-gray;
+      line-height: 1.5;
+      transition: all 0.2s ease;
 
-.vehicle-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2c5282;
-  margin-bottom: 1rem;
-}
-
-.vehicle-price {
-  font-size: 1.25rem;
-  color: #2d3748;
-  margin-bottom: 1.5rem;
-}
-
-.vehicle-price .amount {
-  font-weight: 600;
-  color: #2b6cb0;
-}
-
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .input-grid {
-    grid-template-columns: repeat(2, 1fr);
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px $button-focus;
+        border-color: transparent;
+      }
+    }
   }
-}
 
-.input-group label {
-  display: block;
-  color: #4a5568;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
+  .loading-vehicle-message {
+    text-align: center;
+    padding: 2.5rem 0;
+    background-color: $light-gray;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 $shadow-light;
 
-.input-field {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  appearance: none;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
-  width: calc(100% - 2rem);
-  padding: 0.5rem 1rem;
-  color: #2d3748;
-  line-height: 1.5;
-  transition: all 0.2s ease;
-}
+    p {
+      color: $medium-gray;
+      font-size: 1.25rem;
+    }
+  }
 
-.input-field:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-  border-color: transparent;
-}
+  .not-found-container {
+    text-align: center;
+    padding: 2.5rem;
+    background-color: $white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px $shadow-medium, 0 2px 4px -1px $shadow-lg-light;
+    border: 1px solid #fca5a5;
+    color: $error-text;
 
-.error-message {
-  background-color: #fee2e2;
-  border: 1px solid #ef4444;
-  color: #b91c1c;
-  padding: 1.5rem 1.5rem;
-  border-radius: 0.5rem;
-  position: relative;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+    h2 {
+      font-size: 1.875rem;
+      font-weight: 800;
+      color: #dc2626;
+      margin-bottom: 1rem;
+    }
 
-.error-message strong {
-  font-weight: 700;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.finance-quote-card {
-  background-color: #f0fdf4;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border: 1px solid #dcfce7;
-}
-
-.quote-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #065f46;
-  margin-bottom: 1.25rem;
-  text-align: center;
-}
-
-.quote-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  color: #2d3748;
-  font-size: 1.125rem;
-}
-
-.quote-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.quote-list li span:first-child {
-  font-weight: 500;
-  color: #4a5568;
-}
-
-.quote-list li span:last-child {
-  font-weight: 600;
-  color: #1a202c;
-}
-
-.monthly-payment-item {
-  padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
-  margin-top: 1rem;
-}
-
-.monthly-payment-item .label {
-  font-weight: 800;
-  color: #2b6cb0;
-  font-size: 1.5rem;
-}
-
-.monthly-payment-item .amount {
-  font-weight: 800;
-  color: #2b6cb0;
-  font-size: 1.875rem;
-}
-
-.loading-message {
-  text-align: center;
-  padding: 1.5rem 0;
-  background-color: #f9fafb;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.loading-message p {
-  color: #4a5568;
-  font-size: 1.125rem;
-}
-
-.loading-vehicle-message {
-  text-align: center;
-  padding: 2.5rem 0;
-  background-color: #f9fafb;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.loading-vehicle-message p {
-  color: #4a5568;
-  font-size: 1.25rem;
-}
-
-.not-found-container {
-  text-align: center;
-  padding: 2.5rem;
-  background-color: #fef2f2;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid #fca5a5;
-  color: #b91c1c;
-}
-
-.not-found-container h2 {
-  font-size: 1.875rem;
-  font-weight: 800;
-  color: #dc2626;
-  margin-bottom: 1rem;
-}
-
-.not-found-container p {
-  font-size: 1.125rem;
-  color: #b91c1c;
-  margin-bottom: 1.5rem;
+    p {
+      font-size: 1.125rem;
+      color: $error-text;
+      margin-bottom: 1.5rem;
+    }
+  }
 }

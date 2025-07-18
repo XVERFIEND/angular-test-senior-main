@@ -15,14 +15,16 @@ import { FinanceCalculatorComponent } from '../finance-calculator/finance-calcul
 })
 export class VehicleDetailComponent {
   private route = inject(ActivatedRoute);
-  readonly vehicleStore = inject(VehicleStore);
   private router = inject(Router);
+  readonly vehicleStore = inject(VehicleStore);
 
+  // signal to hold vehicle ID from url param
   vehicleId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id'))),
     { initialValue: null }
   );
 
+  // computed signal. finds vehicle that matches ID
   vehicle = computed(() => {
     const id = this.vehicleId();
     const allVehicles = this.vehicleStore.vehicles();
@@ -33,10 +35,15 @@ export class VehicleDetailComponent {
     return allVehicles.find((v) => v.id === id);
   });
 
+  // signals for handling errors
   vehicleDataAttemptedLoad = signal(false);
   vehicleNotFound = signal(false);
 
   constructor() {
+    /*
+      when data is loaded, set vehicleDataAttemptedLoad true to prevent
+      reapeated attempts to load
+    */
     effect(
       () => {
         if (
@@ -49,6 +56,7 @@ export class VehicleDetailComponent {
       { allowSignalWrites: true }
     );
 
+    // error handling around vehicleNotFound
     effect(
       () => {
         const id = this.vehicleId();
@@ -69,6 +77,7 @@ export class VehicleDetailComponent {
       { allowSignalWrites: true }
     );
 
+    // syncronise store with route
     effect(() => {
       const currentRouteId = this.vehicleId();
       if (this.vehicleStore.selectedVehicleId() !== currentRouteId) {
@@ -77,6 +86,7 @@ export class VehicleDetailComponent {
     });
   }
 
+  // button to return to vehicle list
   goBack(): void {
     this.router.navigate(['/vehicles']);
   }

@@ -8,4 +8,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
+
+/*
+  things i'd add with more time/in future:
+  1. more unit testing
+  2. more specialised components (buttons, inputs, etc...)
+  3. themeing (dark mode)
+*/
+
 export class App {}

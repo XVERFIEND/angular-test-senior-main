@@ -12,8 +12,10 @@ export class VehicleDataService {
 
   constructor(private http: HttpClient) {}
 
-  // mocks pulling data from and endpoint
-  // delay added so we get to see loading state
+  /*
+    mocks pulling data from and endpoint
+    delay added so we get to see loading state
+  */
   getVehicles(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(this.dataPath).pipe(
       delay(1500),

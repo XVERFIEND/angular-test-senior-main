@@ -3,6 +3,7 @@ import { Component, Input, signal, inject, effect } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { combineLatest, map, switchMap, catchError, of, startWith } from 'rxjs';
+
 import { Vehicle } from '../vehicle/vehicle.model';
 import { FinanceCalculatorService } from './finance-calculator-service';
 
@@ -14,16 +15,25 @@ import { FinanceCalculatorService } from './finance-calculator-service';
   styleUrl: './finance-calculator.component.scss',
 })
 export class FinanceCalculatorComponent {
+  // vehicle object propery is required and cannot be null
   @Input({ required: true }) vehicle!: Vehicle;
 
+  // default state
   term = signal(60);
   deposit = signal(0);
 
+  // store error message
   quoteError = signal<string | null>(null);
 
+  // inject calculator service
   private financeCalculatorService = inject(FinanceCalculatorService);
 
   constructor() {
+    /*
+      effect runs whenever dependencies change
+      set deposit to 10% of vehicle price
+      allowSignalWrites required to modify signal inside effect
+    */
     effect(
       () => {
         if (this.vehicle && this.vehicle.price && this.deposit() === 0) {
@@ -34,6 +44,8 @@ export class FinanceCalculatorComponent {
     );
   }
 
+  // create single observable stream from term and deposit
+  // pipe map into object for ease of use
   private financeInputs$ = combineLatest([
     toObservable(this.term),
     toObservable(this.deposit),
@@ -45,6 +57,13 @@ export class FinanceCalculatorComponent {
     }))
   );
 
+  /*
+    convert observable stream into signal for result of quote calculation
+    when financeInputs$ emits a new value:
+    clear any existing error message
+    generate new quote with given values, return observable
+    catch error
+  */
   financeQuote = toSignal(
     this.financeInputs$.pipe(
       switchMap(({ vehicle, term, deposit }) => {
@@ -58,8 +77,9 @@ export class FinanceCalculatorComponent {
             })
           );
       }),
-      startWith(null)
+      // both of these ensure that the financeQuote signal has a guaranteed null state
+      startWith(null) // ensures initial emit of null observable
     ),
-    { initialValue: null }
+    { initialValue: null } // set initial value of signal to null
   );
 }

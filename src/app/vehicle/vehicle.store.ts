@@ -13,6 +13,7 @@ import { Vehicle } from './vehicle.model';
 import { VehicleDataService } from './vehicle-data.service';
 import { VehicleSortService } from '../vehicle-sort/vehicle-sort.service';
 
+// defines the interface for the state
 interface VehicleState {
   vehicles: Vehicle[];
   loading: boolean;
@@ -23,6 +24,7 @@ interface VehicleState {
   sortDirection: 'asc' | 'desc';
 }
 
+// set the initial empty state
 const initialState: VehicleState = {
   vehicles: [],
   loading: false,
@@ -33,10 +35,24 @@ const initialState: VehicleState = {
   sortDirection: 'asc',
 };
 
+/*
+  this is my 2.1.
+  i wanted to use a store to keep the data consistent
+  and i'm assuming the real world data set of vehicles would
+  be quite large. using a store is better for scalability and
+  make it easier to maintain.
+  i specifically wanted to try a signalStore for the reduced
+  boilerplate compared to a traditional NgRx store (which
+  i used a lot previously and always disliked how bulky and
+  convoluted it seemed). i'm also a big fan of signals
+*/
+
 export const VehicleStore = signalStore(
   { providedIn: 'root' },
-  withState(initialState),
+  withState(initialState), // set initial state
+  // derived state. read-only values that are updated when state changes
   withComputed((store, vehicleSortService = inject(VehicleSortService)) => ({
+    // returns the selected vehicle
     selectedVehicle: computed(() => {
       const selectedId = store.selectedVehicleId();
       if (!selectedId) {
@@ -44,7 +60,11 @@ export const VehicleStore = signalStore(
       }
       return store.vehicles().find((v) => v.id === selectedId);
     }),
+    // returns total number of vehicles in store (used for list page,
+    // can be used for pagination or similar)
     totalVehicles: computed(() => store.vehicles().length),
+    // our main value for handling sorting and filtering
+    // of vehicles
     filteredAndSortedVehicles: computed(() => {
       const vehicles = store.vehicles();
       const searchTerm = store.searchTerm().toLowerCase();
@@ -66,6 +86,7 @@ export const VehicleStore = signalStore(
       return processedVehicles;
     }),
   })),
+  // defines functions to modify state
   withMethods((store, vehicleDataService = inject(VehicleDataService)) => ({
     loadVehicles: rxMethod<void>(
       pipe(
