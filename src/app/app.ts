@@ -11,9 +11,11 @@ import { CommonModule } from '@angular/common';
 
 /*
   things i'd add with more time/in future:
-  1. more unit testing
-  2. more specialised components (buttons, inputs, etc...)
-  3. themeing (dark mode)
+  1. more unit testing.
+  2. more specialised components (buttons, inputs, etc...).
+  3. themeing (dark mode).
+  4. linting. there's a conflict with the current version of
+      ngrx so i was unable to get it working in time.
 */
 
 export class App {}
